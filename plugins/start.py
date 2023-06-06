@@ -1,4 +1,4 @@
-#(©)CodeXBotz
+
 
 
 
@@ -203,3 +203,17 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
         msg = await message.reply(REPLY_ERROR)
         await asyncio.sleep(8)
         await msg.delete()
+
+@Client.on_message(filters.command("help") & filters.private)
+async def help_handler(_, event: Message):
+    await event.reply_text(Config.ABOUT_HELP_TEXT.format(event.from_user.mention),
+        reply_markup=InlineKeyboardMarkup([
+            [
+            InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{Config.BOT_USERNAME}?startgroup=true')
+            ],
+
+             [InlineKeyboardButton("About", callback_data="About_msg"),
+             InlineKeyboardButton("Help", callback_data="Help_msg")
+             ]
+        ])
+    )                               
